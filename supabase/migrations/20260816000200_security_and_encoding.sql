@@ -3,8 +3,18 @@ begin;
 -- The automatic-RLS project option installs this event-trigger function in
 -- public. It must continue to run internally, but it does not need to be
 -- callable through the Data API.
-revoke all on function public.rls_auto_enable()
-  from public, anon, authenticated;
+--
+-- Central de teste da ECM (27/10/2026): o projeto foi criado com o RLS
+-- automatico desligado, entao a funcao nao existe. Toda tabela de public liga
+-- o RLS na propria migration.
+do $$
+begin
+  if to_regprocedure('public.rls_auto_enable()') is not null then
+    revoke all on function public.rls_auto_enable()
+      from public, anon, authenticated;
+  end if;
+end
+$$;
 
 -- Cover the composite foreign key used when patients are archived or checked.
 create index if not exists followups_patient_clinic_idx
