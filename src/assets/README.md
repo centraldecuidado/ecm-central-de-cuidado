@@ -1,5 +1,23 @@
 # Arte de fundo da barra lateral
 
+## Login da Central de teste: `login-robo.jpg` (27/10/2026)
+
+Robô humanoide de perfil, olhando para a esquerda, em linhas finas azul-claras
+sobre o azul-escuro do painel: o cérebro é uma rede de pontos acesos e, no
+peito, um coração aceso ligado à cabeça por fios. É a tecnologia que cuida, no
+lugar da arte de otorrino. Está só no login (`src/pages/Login.tsx`); o menu
+continua com `sidebar-otorrino.jpg`.
+
+Gerada no GPT Image 2.5 (qualidade média, 9:16, 752 × 1344, reduzida para
+640 × 1144 em JPEG 88%), com o mesmo pedido da arte de otorrino trocando a
+figura por "a friendly, elegant humanoid robot (...) fine circuit traces and a
+delicate neural network inside the robot's head, a soft glowing eye, and a
+small glowing heart-shaped core in the center of the chest, connected to the
+head by thin flowing circuit lines along the neck, symbolizing technology that
+cares (...) not menacing". O robô está centralizado, então o foco é o centro
+(`object-center`), e a opacidade subiu de 0,22 para 0,3: as linhas dele são
+mais finas que as da arte de otorrino e sumiam no fundo.
+
 ## Dr. Fábio: `sidebar-otorrino.jpg` (15/10/2026)
 
 Perfil de cabeça e pescoço olhando para a esquerda, com o caminho do ar aceso:
