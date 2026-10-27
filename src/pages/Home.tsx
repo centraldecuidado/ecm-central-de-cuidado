@@ -42,7 +42,7 @@ import Agenda from '@/sections/Agenda'
 import Settings from '@/sections/Settings'
 import AccessAdmin from '@/sections/AccessAdmin'
 import { lembrarClinica, logoNoFundoEscuro, marcaDaClinica, ultimaClinicaVista } from '@/lib/marca'
-import arteDoMenu from '@/assets/sidebar-otorrino.jpg'
+import arteDoMenu from '@/assets/login-robo.jpg'
 import { useAuth } from '@/auth/AuthProvider'
 import { useDialogos } from '@/components/dialogos-contexto'
 import { apagarParametrosDoEndereco, parametrosDoEndereco } from '@/lib/endereco'
@@ -541,16 +541,15 @@ export default function Home() {
   return (
     <div className="min-h-dvh bg-[#f7f5f1] text-[#081b2c]">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[286px] flex-col overflow-hidden bg-[#081b2c] text-white lg:flex">
-        {/* Arte de otorrino (15/10/2026), no lugar do aparelho digestivo do
-            Dr. Marcello. O foco em 40% da largura mantem o nariz e o ouvido
-            dentro da coluna, do notebook ao monitor alto (ver
-            src/assets/README.md). */}
+        {/* O robo do login (27/10/2026), no lugar da arte de otorrino. O foco
+            em 45% da largura mantem o rosto e o cerebro dentro da coluna, do
+            notebook ao monitor alto (ver src/assets/README.md). */}
         <img
           src={arteDoMenu}
           alt=""
           aria-hidden="true"
           draggable={false}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[40%_center] opacity-[0.17] mix-blend-screen select-none"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[45%_center] opacity-[0.23] mix-blend-screen select-none"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#081b2c]/80 via-[#081b2c]/25 to-[#081b2c]/80" />
         <div className="soft-grid absolute inset-0 opacity-40" />
