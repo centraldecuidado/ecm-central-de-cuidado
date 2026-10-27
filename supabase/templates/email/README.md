@@ -16,11 +16,11 @@ preenchidas pelo Supabase; nao mexa nelas.
 
 ## O logo
 
-Os cinco modelos mostram o logo do Dr. Fabio a partir de
-`https://fabiodario.github.io/central-de-cuidado/logo-email.png` (16/10/2026):
-o arquivo e `public/logo-email.png`, publicado junto com o sistema, e sai de
-`scripts/marca/gerar_marca.py` (versao de letra branca para o cabecalho
-azul-escuro, 400 px de largura, mostrada a 200 px). Se o sistema mudar de
+Os cinco modelos mostram o logo da Central de Cuidado a partir de
+`https://centraldecuidado.github.io/ecm-central-de-cuidado/sistema/logo-email.png`
+(27/10/2026): o arquivo e `public/logo-email.png`, publicado junto com o
+sistema, e sai de `scripts/marca/gerar_marca_central.py` (versao de letra
+branca para o cabecalho azul-escuro). Se o sistema mudar de
 endereco, troque nos cinco arquivos e cole de novo no Supabase.
 
 ## Remetente
