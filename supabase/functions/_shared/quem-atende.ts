@@ -1,0 +1,149 @@
+/**
+ * Quem atende, nas frases fixas do robo (27/09/2026).
+ *
+ * O robo foi escrito para uma clinica so, e dez frases levavam "Dr. Marcello"
+ * no proprio codigo - "quem responde e o Dr. Marcello", "Vou passar para o Dr.
+ * Marcello". A clinica de teste, usada para desenvolver e para demonstrar o
+ * sistema a outros medicos, respondia com o nome dele.
+ *
+ * ESPELHO DO DR. FABIO DARIO (15/10/2026).
+ *
+ * Este sistema e uma copia do sistema do Dr. Marcello Ruiz (gastropediatria),
+ * adaptada ao consultorio do Dr. Fabio Dario (otorrinolaringologia, Santos e
+ * Sao Paulo). O robo e o mesmo; o que muda de uma clinica para a outra mora
+ * aqui, no perfil:
+ *  - com quem o robo fala: os pais, sobre a crianca (pediatria), ou o proprio
+ *    paciente, adulto ou crianca (geral);
+ *  - o alerta de sangramento, pedido do Dr. Fabio;
+ *  - a frase do pronto-socorro, que no Dr. Fabio cita os convenios.
+ *
+ * O padrao AQUI e o Dr. Fabio: e a clinica deste sistema, e uma clinica sem
+ * perfil cadastrado nao pode responder com o nome de um medico de outro
+ * consultorio. O perfil pediatrico do Dr. Marcello continua existindo por um
+ * motivo so: os ~1.200 casos de tests/atendimento.test.mjs (clinica "c1")
+ * foram escritos para ele e continuam rodando nele. Sao a prova de que o
+ * motor nao quebrou ao ganhar o perfil novo.
+ */
+export type QuemAtende = {
+  /** No meio da frase: "quem responde e {o}", "Vou passar para {o}". */
+  o: string
+  /** No comeco da frase: "{O} vai revisar". */
+  O: string
+  /** Saudacao usada so quando a clinica nao cadastrou a dela. */
+  saudacaoPadrao: string
+  /**
+   * Com quem o robo fala (15/10/2026).
+   *
+   * 'pediatria' e o robo de origem: fala com a mae sobre a crianca ("cuidar
+   * do seu filho", "nome completo do paciente (a crianca)").
+   *
+   * 'geral' e o otorrino, que atende adultos e criancas: quem escreve costuma
+   * ser o proprio paciente. A ficha pergunta o motivo da consulta e so pede o
+   * responsavel quando o paciente e menor de idade.
+   */
+  publico: 'pediatria' | 'geral'
+  /**
+   * Quem recebe no celular o alerta de sangramento, como cabe na frase "Ja
+   * avisei {alertaDeSangramento}". Nulo = o robo nao tem o modulo.
+   *
+   * Pedido do Dr. Fabio (relatorio da Cintia, 15/10/2026): qualquer mencao a
+   * sangramento dispara na hora um aviso para o celular dele e da Dayane, a
+   * secretaria. Ver falouDeSangramento em atendimento.ts.
+   */
+  alertaDeSangramento: string | null
+  /**
+   * A orientacao de pronto-socorro, quando o perfil tem uma propria. Nulo =
+   * as frases de sempre ("procure o pronto-socorro mais proximo ou ligue 192").
+   */
+  prontoSocorro: string | null
+  /**
+   * Os sinais de alarme do otorrino (16/10/2026, painel de pacientes
+   * simulados): corpo estranho, falta de ar, surdez subita, tontura forte com
+   * vomito, nao conseguir engolir, rosto torto. Ligado, a mensagem com um deles
+   * recebe a orientacao de pronto-socorro e acende como urgencia. Ver
+   * sinalDeAlarme em atendimento.ts.
+   */
+  sinaisDeAlarme: boolean
+  /**
+   * Quem da equipe o paciente chama pelo nome ("a Dayane esta?"). A mensagem
+   * para ela vai direto para a equipe. Ver pediuAtendente em atendimento.ts.
+   */
+  equipe: string[]
+  /**
+   * Como o medico pode ser chamado, sem acento e em minusculas. Outro nome
+   * ("e do consultorio do Dr. Marcelo?") recebe a explicacao de que este e
+   * outro consultorio. Ver outroMedico em atendimento.ts.
+   */
+  nomesDoMedico: string[]
+}
+
+/** O id da clinica do Dr. Fabio Dario no banco (e no simulador). */
+export const CLINICA_DR_FABIO = 'b5d0f6a2-3c71-4e8a-9f2d-7a1c4e9b0d63'
+
+const DR_FABIO: QuemAtende = {
+  o: 'o Dr. Fábio',
+  O: 'O Dr. Fábio',
+  saudacaoPadrao: 'Olá! 👋 Seja muito bem-vindo(a) ao consultório do Dr. Fábio Dario, médico otorrinolaringologista.',
+  publico: 'geral',
+  alertaDeSangramento: 'o Dr. Fábio e a Dayane',
+  // Redacao pedida pelo Dr. Fabio. Neutra de proposito: nao indica hospital
+  // fixo, porque cada um atende convenios diferentes (o Hospital Ana Costa, por
+  // exemplo, e do grupo Amil e nao atende Porto Saude). Mandar o paciente ao
+  // hospital errado no meio de um sangramento e pior do que nao indicar.
+  prontoSocorro:
+    'Em caso de urgência, emergência ou sangramento intenso, dirija-se imediatamente ao Pronto-Socorro mais próximo ' +
+    'que atenda ao seu plano de saúde (Porto Saúde, Unimed, Santa Saúde) ou ao atendimento particular de sua preferência.',
+  sinaisDeAlarme: true,
+  equipe: ['Dayane'],
+  // O site e o Instagram assinam "Dr. Fabio Pavani Dario".
+  nomesDoMedico: ['fabio', 'dario', 'pavani'],
+}
+
+/**
+ * Consultorio Central de Cuidado (27/10/2026): a Central de teste da ECM, em
+ * https://centraldecuidado.github.io/ecm-central-de-cuidado/sistema/. E a copia do sistema do Dr. Fabio,
+ * com o nome e o logo da Central de Cuidado e a medica ficticia das
+ * demonstracoes, a Dra. Ana Ribeiro (a mesma da clinica de demonstracao do Dr.
+ * Marcello), agora otorrino. A secretaria ficticia e a Julia. Responde pelo
+ * numero de teste da ECM; o Dr. Fabio continua no dele.
+ */
+export const CLINICA_CENTRAL = '91853de7-e223-444d-bc6d-e4b14165b704'
+
+const CENTRAL_DE_CUIDADO: QuemAtende = {
+  o: 'a Dra. Ana',
+  O: 'A Dra. Ana',
+  saudacaoPadrao: 'Olá! 👋 Aqui é o Consultório Central de Cuidado, da Dra. Ana Ribeiro, otorrinolaringologista.',
+  publico: 'geral',
+  alertaDeSangramento: 'a Dra. Ana e a Júlia',
+  // A frase do Dr. Fabio sem os convenios dele.
+  prontoSocorro:
+    'Em caso de urgência, emergência ou sangramento intenso, dirija-se imediatamente ao Pronto-Socorro mais próximo ' +
+    'que atenda ao seu plano de saúde ou ao atendimento particular de sua preferência.',
+  sinaisDeAlarme: true,
+  equipe: ['Júlia'],
+  nomesDoMedico: ['ana', 'ribeiro'],
+}
+
+/** O robo de origem, pediatrico. So os testes do motor ("c1") rodam nele aqui. */
+const DR_MARCELLO: QuemAtende = {
+  o: 'o Dr. Marcello',
+  O: 'O Dr. Marcello',
+  saudacaoPadrao: 'Olá! 👋 Aqui é o consultório do Dr. Marcello Ruiz, Gastroenterologista Pediátrico.',
+  publico: 'pediatria',
+  alertaDeSangramento: null,
+  prontoSocorro: null,
+  // Os testes do motor de origem continuam sem os modulos do otorrino.
+  sinaisDeAlarme: false,
+  equipe: [],
+  nomesDoMedico: [],
+}
+
+const PERFIS: Record<string, QuemAtende> = {
+  [CLINICA_DR_FABIO]: DR_FABIO,
+  [CLINICA_CENTRAL]: CENTRAL_DE_CUIDADO,
+  c1: DR_MARCELLO,
+}
+
+export function quemAtende(clinicId: string | null | undefined): QuemAtende {
+  return (clinicId && PERFIS[clinicId]) || DR_FABIO
+}

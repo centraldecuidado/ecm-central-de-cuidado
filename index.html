@@ -1,195 +1,71 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ECM Central de Cuidado</title>
-  <meta name="description" content="ECM Central de Cuidado: atendimento, agenda e acompanhamento de pacientes para consultórios.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23081b2c'/%3E%3Cpath d='M32 46s-14-8.2-14-18.4C18 22.3 22 19 26.4 19c2.6 0 4.6 1.3 5.6 3.2 1-1.9 3-3.2 5.6-3.2C42 19 46 22.3 46 27.6 46 37.8 32 46 32 46z' fill='%236fb5e8'/%3E%3C/svg%3E">
-  <style>
-    :root {
-      --tinta: #081b2c;
-      --tinta-suave: #3d5568;
-      --azul: #2f7fc1;
-      --azul-escuro: #1f5f96;
-      --ceu: #6fb5e8;
-      --fundo: #f4f7fa;
-      --cartao: #ffffff;
-      --linha: rgba(8, 27, 44, 0.12);
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; }
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--fundo);
-      color: var(--tinta);
-      font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    .pagina {
-      flex: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    }
-    .marca {
-      position: relative;
-      overflow: hidden;
-      padding: 56px 64px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: radial-gradient(120% 90% at 0% 0%, #12385a 0%, var(--tinta) 60%);
-      color: #fff;
-    }
-    .marca::after {
-      content: '';
-      position: absolute;
-      right: -160px;
-      bottom: -160px;
-      width: 420px;
-      height: 420px;
-      border-radius: 50%;
-      border: 1px solid rgba(111, 181, 232, 0.18);
-      box-shadow: 0 0 0 60px rgba(111, 181, 232, 0.05), 0 0 0 130px rgba(111, 181, 232, 0.03);
-    }
-    .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -0.02em; font-size: 18px; }
-    .logo svg { width: 40px; height: 40px; flex: none; }
-    .logo small { display: block; font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ceu); }
-    .chamada { position: relative; z-index: 1; max-width: 460px; }
-    .chamada h1 { margin: 0 0 16px; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.12; letter-spacing: -0.035em; font-weight: 800; }
-    .chamada p { margin: 0; font-size: 16px; line-height: 1.6; color: rgba(255, 255, 255, 0.74); }
-    .pontos { position: relative; z-index: 1; display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; font-size: 14px; color: rgba(255, 255, 255, 0.82); }
-    .pontos li { display: flex; align-items: center; gap: 10px; }
-    .pontos li::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--ceu); flex: none; }
-    .acesso { display: flex; align-items: center; justify-content: center; padding: 48px 24px; }
-    .cartao {
-      width: 100%;
-      max-width: 400px;
-      background: var(--cartao);
-      border: 1px solid var(--linha);
-      border-radius: 24px;
-      padding: 36px 32px 32px;
-      box-shadow: 0 24px 60px -32px rgba(8, 27, 44, 0.35);
-    }
-    .cartao h2 { margin: 0 0 6px; font-size: 24px; letter-spacing: -0.03em; font-weight: 800; }
-    .cartao .sub { margin: 0 0 26px; font-size: 14px; line-height: 1.5; color: var(--tinta-suave); }
-    label { display: block; margin: 0 0 6px; font-size: 12px; font-weight: 700; color: var(--tinta-suave); }
-    input {
-      width: 100%;
-      margin: 0 0 16px;
-      padding: 13px 14px;
-      border: 1px solid var(--linha);
-      border-radius: 12px;
-      background: #fbfcfd;
-      color: var(--tinta);
-      font: inherit;
-      font-size: 15px;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-    input:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 4px rgba(47, 127, 193, 0.14); background: #fff; }
-    button {
-      width: 100%;
-      margin-top: 4px;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--tinta);
-      color: #fff;
-      font: inherit;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.15s ease, transform 0.15s ease;
-    }
-    button:hover { background: #12385a; }
-    button:active { transform: scale(0.99); }
-    .aviso {
-      display: none;
-      margin: 18px 0 0;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: #eef5fc;
-      color: var(--azul-escuro);
-      font-size: 13px;
-      line-height: 1.5;
-      font-weight: 600;
-    }
-    .aviso.visivel { display: block; }
-    .rodape {
-      padding: 20px 24px;
-      border-top: 1px solid var(--linha);
-      background: #fff;
-      color: var(--tinta-suave);
-      font-size: 12px;
-      line-height: 1.6;
-      text-align: center;
-    }
-    .rodape strong { color: var(--tinta); }
-    @media (max-width: 860px) {
-      .pagina { grid-template-columns: 1fr; }
-      .marca { padding: 32px 24px 36px; gap: 28px; }
-      .marca::after { display: none; }
-      .pontos { display: none; }
-      .acesso { padding: 28px 16px 40px; }
-      .cartao { padding: 28px 22px 24px; border-radius: 20px; }
-    }
-  </style>
-</head>
-<body>
-  <main class="pagina">
-    <section class="marca" aria-label="ECM Central de Cuidado">
-      <div class="logo">
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <rect width="64" height="64" rx="16" fill="#12385a"/>
-          <path d="M32 46s-14-8.2-14-18.4C18 22.3 22 19 26.4 19c2.6 0 4.6 1.3 5.6 3.2 1-1.9 3-3.2 5.6-3.2C42 19 46 22.3 46 27.6 46 37.8 32 46 32 46z" fill="#6fb5e8"/>
-        </svg>
-        <span>ECM Central de Cuidado<small>Gestão para consultórios</small></span>
-      </div>
-      <div class="chamada">
-        <h1>O cuidado com o paciente, do primeiro contato ao retorno.</h1>
-        <p>Atendimento pelo WhatsApp, agenda e acompanhamento depois da consulta, num só lugar para a equipe do consultório.</p>
-      </div>
-      <ul class="pontos">
-        <li>Atendimento e agendamento pelo WhatsApp</li>
-        <li>Agenda e prontuário integrados</li>
-        <li>Acompanhamento depois da consulta</li>
-      </ul>
-    </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f2439" />
+    <meta name="description" content="Central de Cuidado: agenda, prontuário e atendimento pelo WhatsApp para consultórios." />
 
-    <section class="acesso">
-      <form class="cartao" id="entrar" novalidate>
-        <h2>Entrar</h2>
-        <p class="sub">Área da equipe dos consultórios atendidos.</p>
-        <label for="email">E-mail</label>
-        <input id="email" type="email" autocomplete="username" placeholder="nome@consultorio.com.br">
-        <label for="senha">Senha</label>
-        <input id="senha" type="password" autocomplete="current-password" placeholder="Sua senha">
-        <button type="submit">Entrar</button>
-        <p class="aviso" id="aviso" role="status">
-          O acesso é liberado pela equipe da ECM Central de Cuidado para os consultórios atendidos.
-        </p>
-      </form>
-    </section>
-  </main>
+    <!-- Icone da clinica (21/09/2026): sem ele a aba mostrava o globo em
+         branco do navegador. Desde 15/10/2026 sao os tres circulos do logo do
+         Dr. Fabio, gerados por scripts/marca/gerar_marca.py. Ate ali eram os
+         icones herdados do Dr. Marcello (o M), na aba e no atalho do celular.
+         Na Central de teste da ECM (27/10/2026) sao o simbolo da Central de
+         Cuidado, gerados por scripts/marca/gerar_marca_central.py.
+         Trocou o icone, sobe o ?v= aqui, no manifest.json e no sw.js. -->
+    <link rel="icon" href="./favicon.ico?v=5" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./icone-32.png?v=5" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./icone-16.png?v=5" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png?v=5" />
+    <meta name="apple-mobile-web-app-title" content="Central" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content="Central de Cuidado" />
+    <meta property="og:description" content="Acompanhamento inteligente. Cuidado contínuo." />
+    <meta property="og:image" content="./og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Central de Cuidado" />
+    <meta name="twitter:description" content="Acompanhamento inteligente. Cuidado contínuo." />
+    <meta name="twitter:image" content="./og.png" />
+    <title>Central de Cuidado</title>
 
-  <footer class="rodape">
-    <strong>ECM Central de Cuidado</strong> é um serviço de <strong>PAULA LOPES MEDINA CARVALHO LTDA</strong>
-    · CNPJ 65.380.135/0001-75<br>
-    Av. Paulista, 1636, conj. 4, 15º andar, Bela Vista, São Paulo/SP, CEP 01310-200
-  </footer>
+    <!--
+      O manifesto (o que transforma a pagina em aplicativo instalavel) so entra
+      no celular, por pedido de 21/09/2026.
 
-  <script>
-    // Nada sai desta pagina: o formulario nao envia nem guarda o que foi digitado.
-    document.getElementById('entrar').addEventListener('submit', function (evento) {
-      evento.preventDefault()
-      document.getElementById('senha').value = ''
-      document.getElementById('aviso').classList.add('visivel')
-    })
-  </script>
-</body>
+      No computador ele faria o Chrome oferecer "instalar aplicativo" para quem
+      ja usa o sistema o dia inteiro numa aba - um convite que so confunde a
+      recepcao, e que cria uma segunda janela sem barra de endereco onde
+      ninguem sabe conferir a versao publicada.
+
+      No telefone o atalho vale: abre em tela cheia, com o icone da clinica, e
+      a equipe nao precisa procurar o endereco no navegador.
+
+      NAO existe service worker aqui, e e de proposito. Ele guardaria a versao
+      antiga do sistema em cache e serviria ela depois de uma publicacao - que
+      e exatamente o problema que o carimbo de versao no rodape do menu existe
+      para denunciar. Sem service worker o telefone sempre busca o que esta no
+      ar; o atalho continua funcionando, so nao funciona sem internet (e sem
+      internet ele nao teria banco para consultar de qualquer jeito).
+    -->
+    <script>
+      (function () {
+        var celular =
+          /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+          window.matchMedia('(max-width: 900px)').matches;
+        if (!celular) return;
+        var l = document.createElement('link');
+        l.rel = 'manifest';
+        l.href = './manifest.json?v=5';
+        document.head.appendChild(l);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
