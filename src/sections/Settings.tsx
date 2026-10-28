@@ -32,6 +32,7 @@ import SegundaLeituraDoJev from '@/sections/SegundaLeituraDoJev'
 import AlertaDeUrgencia from '@/sections/AlertaDeUrgencia'
 import EnvioDoAcompanhamento from '@/sections/EnvioDoAcompanhamento'
 import InformacoesDoWhatsApp from '@/sections/InformacoesDoWhatsApp'
+import ModelosDeMensagem from '@/sections/ModelosDeMensagem'
 import NotificacoesNoCelular from '@/sections/NotificacoesNoCelular'
 import { marcaSemClinicaConhecida } from '@/lib/marca'
 import { publicoDaClinica } from '@/lib/publico'
@@ -321,6 +322,7 @@ export default function Settings({ db, setEtapas, importDb, clearAll }: Props) {
           </div>
         </div>
       </section>
+      <ModelosDeMensagem />
       </div>
 
       <aside className="space-y-4">

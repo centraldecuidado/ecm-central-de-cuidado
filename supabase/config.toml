@@ -51,3 +51,8 @@ verify_jwt = false
 # O Jev no simulador do sistema (17/10/2026): chamada pelo navegador com a
 # sessao do usuario logado. Mantem o JWT.
 verify_jwt = true
+
+[functions.whatsapp-modelos]
+# Modelos de mensagem em Preferencias (28/10/2026): chamada pelo navegador com
+# a sessao do usuario logado; criar e so do responsavel. Mantem o JWT.
+verify_jwt = true

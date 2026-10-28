@@ -22,6 +22,7 @@ import {
 } from '../../supabase/functions/_shared/prazo-do-retorno.ts'
 import { comNonoDigito } from '../../supabase/functions/_shared/telefone-br.ts'
 import { licencaPelaResposta } from '../../supabase/functions/_shared/licenca-da-assinatura.ts'
+import type { ModeloDaMeta, PedidoDeModelo } from '../../supabase/functions/_shared/modelo-de-mensagem.ts'
 import {
   consultasQueNaoAconteceram,
   diaEmSaoPaulo,
@@ -3821,6 +3822,24 @@ export async function atualizarDadosDoPerfil() {
     body: { acao: 'dados' },
   })
   if (error) throw new Error(await motivoDaFalha(error, 'Não foi possível gravar o perfil.'))
+}
+
+/** Os modelos de mensagem da conta na Meta (ver whatsapp-modelos). So leitura. */
+export async function listarModelosDoWhatsApp(): Promise<ModeloDaMeta[]> {
+  const { data, error } = await supabase.functions.invoke('whatsapp-modelos', {
+    body: { acao: 'listar' },
+  })
+  if (error) throw new Error(await motivoDaFalha(error, 'Não foi possível consultar os modelos na Meta.'))
+  return (data as { modelos?: ModeloDaMeta[] } | null)?.modelos ?? []
+}
+
+/** Manda um modelo novo para a analise da Meta. So o responsavel consegue. */
+export async function criarModeloDoWhatsApp(pedido: PedidoDeModelo) {
+  const { data, error } = await supabase.functions.invoke('whatsapp-modelos', {
+    body: { acao: 'criar', ...pedido },
+  })
+  if (error) throw new Error(await motivoDaFalha(error, 'Não foi possível enviar o modelo para a Meta.'))
+  return data as { ok: true; id: string | null; status: string | null }
 }
 
 // ---------------------------------------------------------------------------
