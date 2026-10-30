@@ -22,7 +22,7 @@ const base = {
   texto: 'Quero falar com alguém',
   pacientes: [{ name: 'Joana Lima' }],
   nomeDoPerfil: 'Mãe da Joana',
-  telefone: '5513991165576',
+  telefone: '5513900000000',
 }
 
 caso('conversa que o robo resolveu sozinho nao avisa ninguem', () => {
@@ -90,7 +90,7 @@ caso('irmaos no mesmo telefone: usa o nome do perfil, nao um dos filhos', () => 
 
 caso('sem cadastro e sem nome de perfil: telefone formatado', () => {
   const a = montarAviso({ ...base, motivoAgora: 'atendente', pacientes: [], nomeDoPerfil: '' })
-  assert.equal(a.titulo, '(13) 99116-5576 quer falar com a equipe')
+  assert.equal(a.titulo, '(13) 90000-0000 quer falar com a equipe')
 })
 
 caso('anexo sem legenda vira texto legivel, e texto longo e cortado', () => {

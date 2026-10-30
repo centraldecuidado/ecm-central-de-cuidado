@@ -3,12 +3,12 @@
 // A Central de teste e a copia do sistema do Dr. Fabio. A clinica nasce com os
 // mesmos dados do simulador dele (unidades, horarios de exemplo, respostas
 // prontas, saudacoes e textos de acompanhamento), trocando o que e dele pelo
-// consultorio ficticio das demonstracoes: "Consultorio Central de Cuidado", da
-// Dra. Ana Ribeiro, otorrino, com a secretaria Julia. Enderecos e telefones das
-// unidades viram ficticios; telefone de unidade sai do texto.
+// consultorio ficticio das demonstracoes: "Consultorio Central de Cuidado", sem
+// nome de medica, com a secretaria Julia. Enderecos e telefones das unidades
+// viram ficticios; telefone de unidade sai do texto.
 //
 // O id da clinica e CLINICA_CENTRAL (quem-atende.ts): e por ele que o robo usa
-// o perfil da Dra. Ana.
+// o perfil da Central.
 //
 // Como usar, depois de "npm run test:bot" (que monta tests/simulador.build):
 //   node scripts/clinica-central-sql.mjs > clinica.sql
@@ -25,18 +25,19 @@ const NUMERO_DE_TESTE_DA_ECM = '1450629741458788'
 // A ordem importa: as formas mais longas primeiro.
 const TROCAS = [
   ['Dr. Fábio Dario | Otorrino', 'Consultório Central de Cuidado'],
-  ['ao consultório do Dr. Fábio Dario, médico otorrinolaringologista', 'ao Consultório Central de Cuidado, da Dra. Ana Ribeiro, otorrinolaringologista'],
-  ['Aqui é o consultório do Dr. Fábio Dario, otorrinolaringologista', 'Aqui é o Consultório Central de Cuidado, da Dra. Ana Ribeiro, otorrinolaringologista'],
+  ['ao consultório do Dr. Fábio Dario, médico otorrinolaringologista', 'ao Consultório Central de Cuidado'],
+  ['Aqui é o consultório do Dr. Fábio Dario, otorrinolaringologista', 'Aqui é o Consultório Central de Cuidado'],
   ['consultório do Dr. Fábio Dario', 'Consultório Central de Cuidado'],
-  ['equipe do Dr. Fábio Dario', 'equipe da Dra. Ana Ribeiro'],
-  ['O Dr. Fábio Dario', 'A Dra. Ana Ribeiro'],
-  ['Dr. Fábio Dario', 'Dra. Ana Ribeiro'],
-  ['do Dr. Fábio', 'da Dra. Ana'],
-  ['ao Dr. Fábio', 'à Dra. Ana'],
-  ['pelo Dr. Fábio', 'pela Dra. Ana'],
-  ['O Dr. Fábio', 'A Dra. Ana'],
-  ['o Dr. Fábio', 'a Dra. Ana'],
-  ['Dr. Fábio', 'Dra. Ana'],
+  ['equipe do Dr. Fábio Dario, otorrinolaringologista', 'equipe do Consultório Central de Cuidado'],
+  ['equipe do Dr. Fábio Dario', 'equipe do Consultório Central de Cuidado'],
+  ['O Dr. Fábio Dario', 'A médica'],
+  ['Dr. Fábio Dario', 'médica'],
+  ['do Dr. Fábio', 'da médica'],
+  ['ao Dr. Fábio', 'à médica'],
+  ['pelo Dr. Fábio', 'pela médica'],
+  ['O Dr. Fábio', 'A médica'],
+  ['o Dr. Fábio', 'a médica'],
+  ['Dr. Fábio', 'médica'],
   ['Dayane', 'Júlia'],
   // "ele" era o Dr. Fabio; o do audio continua "ele".
   ['é nela que ele explica', 'é nela que ela explica'],
@@ -78,7 +79,7 @@ const modelo = (chave) => store.match(new RegExp(`\\b${chave}: '([^']+)'`))[1]
 
 sql('-- Clinica da Central de teste da ECM (27/10/2026).')
 sql('-- Gerado por scripts/clinica-central-sql.mjs a partir dos dados do simulador do')
-sql('-- Dr. Fabio, com os nomes do Consultorio Central de Cuidado (Dra. Ana Ribeiro).')
+sql('-- Dr. Fabio, com os nomes do Consultorio Central de Cuidado.')
 sql('begin;')
 sql('')
 sql('do $$')
@@ -107,7 +108,7 @@ const colunas = {
   template_m90: modelo('m90'),
   whatsapp_profile_about: 'Otorrinolaringologia · Central de teste',
   whatsapp_profile_description:
-    'Consultório Central de Cuidado, da Dra. Ana Ribeiro (otorrinolaringologia). Central de teste e de demonstração da ECM Central de Cuidado.',
+    'Consultório Central de Cuidado (otorrinolaringologia). Central de teste e de demonstração da ECM Central de Cuidado.',
   // O numero de teste da ECM (Meta, 27/10/2026). Lista de teste vazia = modo
   // teste: os robos agendados so mandam para os celulares que entrarem nela.
   whatsapp_phone_number_id: NUMERO_DE_TESTE_DA_ECM,

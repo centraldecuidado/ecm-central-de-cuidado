@@ -32,16 +32,16 @@ confere('clinica dos testes do motor (c1): o perfil pediatrico', origem.o === 'o
 confere('perfil pediatrico sem o modulo de sangramento', origem.alertaDeSangramento === null)
 confere('nenhuma frase do Dr. Fabio cita o Dr. Marcello', !/Marcello/.test(JSON.stringify(fabio)), JSON.stringify(fabio))
 
-// Central de teste da ECM (27/10/2026): copia do Dr. Fabio com a medica
-// ficticia das demonstracoes. Nenhuma frase pode levar o nome de medico ou
-// secretaria de verdade.
+// Central de teste da ECM (27/10/2026): copia do Dr. Fabio, sem nome de medica
+// desde 30/10/2026. Nenhuma frase pode levar o nome de medico ou secretaria de
+// verdade.
 const central = quemAtende(CLINICA_CENTRAL)
-confere('Central de teste da ECM: a Dra. Ana', central.o === 'a Dra. Ana' && central.O === 'A Dra. Ana')
+confere('Central de teste da ECM: a médica, sem nome', central.o === 'a médica' && central.O === 'A médica')
 confere('Central de teste da ECM: fala com o proprio paciente', central.publico === 'geral')
-confere('Central de teste da ECM: sangramento e sinais de alarme ligados', central.alertaDeSangramento === 'a Dra. Ana e a Júlia' && central.sinaisDeAlarme)
+confere('Central de teste da ECM: sangramento e sinais de alarme ligados', central.alertaDeSangramento === 'a médica e a Júlia' && central.sinaisDeAlarme)
 confere(
-  'Central de teste da ECM: nenhuma frase cita o Dr. Fabio, a Dayane ou o Dr. Marcello',
-  !/F[aá]bio|Dayane|Marcello|Porto Saúde/.test(JSON.stringify(central)),
+  'Central de teste da ECM: nenhuma frase cita o Dr. Fabio, a Dayane, o Dr. Marcello ou a Dra. Ana',
+  !/F[aá]bio|Dayane|Marcello|Porto Saúde|Dra\. Ana|Ribeiro/.test(JSON.stringify(central)),
   JSON.stringify(central),
 )
 

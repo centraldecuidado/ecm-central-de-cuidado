@@ -1,6 +1,6 @@
 /**
  * A clinica de teste, que e tambem a de demonstracao: "Consultorio Central de
- * Cuidado", da Dra. Ana Ribeiro (ficticia). Ver
+ * Cuidado" (ficticio). Ver
  * supabase/sql/demo_identidade_central.sql e _shared/quem-atende.ts.
  *
  * Num lugar so porque o sistema trata essa clinica diferente em mais de um

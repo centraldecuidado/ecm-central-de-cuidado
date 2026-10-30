@@ -10,8 +10,8 @@ publicada como a Central de teste e de demonstração da ECM Central de Cuidado:
   https://centraldecuidado.github.io/ecm-central-de-cuidado/sistema/;
 - projeto Supabase próprio, numa conta criada com o GitHub da centraldecuidado;
 - clínica "Consultório Central de Cuidado" (`CLINICA_CENTRAL` em
-  `supabase/functions/_shared/quem-atende.ts`), com a médica fictícia Dra. Ana
-  Ribeiro, otorrino, e a secretária fictícia Júlia; marca e ícones da Central
+  `supabase/functions/_shared/quem-atende.ts`), sem nome de médica e com a
+  secretária fictícia Júlia; marca e ícones da Central
   de Cuidado (`scripts/marca/gerar_marca_central.py`); dados da clínica em
   `scripts/clinica-central-sql.mjs`;
 - WhatsApp: o número de teste da ECM na Meta (+1 555 161-0622, Phone Number ID

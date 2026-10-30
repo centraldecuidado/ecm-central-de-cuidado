@@ -102,26 +102,27 @@ const DR_FABIO: QuemAtende = {
 /**
  * Consultorio Central de Cuidado (27/10/2026): a Central de teste da ECM, em
  * https://centraldecuidado.github.io/ecm-central-de-cuidado/sistema/. E a copia do sistema do Dr. Fabio,
- * com o nome e o logo da Central de Cuidado e a medica ficticia das
- * demonstracoes, a Dra. Ana Ribeiro (a mesma da clinica de demonstracao do Dr.
- * Marcello), agora otorrino. A secretaria ficticia e a Julia. Responde pelo
- * numero de teste da ECM; o Dr. Fabio continua no dele.
+ * com o nome e o logo da Central de Cuidado. A secretaria ficticia e a Julia.
+ * Responde pelo numero de teste da ECM; o Dr. Fabio continua no dele.
+ *
+ * Sem nome de medica desde 30/10/2026: o nome ficticio podia coincidir com o de
+ * uma medica de verdade, e o consultorio de demonstracao fala por si.
  */
 export const CLINICA_CENTRAL = '91853de7-e223-444d-bc6d-e4b14165b704'
 
 const CENTRAL_DE_CUIDADO: QuemAtende = {
-  o: 'a Dra. Ana',
-  O: 'A Dra. Ana',
-  saudacaoPadrao: 'Olá! 👋 Aqui é o Consultório Central de Cuidado, da Dra. Ana Ribeiro, otorrinolaringologista.',
+  o: 'a médica',
+  O: 'A médica',
+  saudacaoPadrao: 'Olá! 👋 Seja muito bem-vindo(a) ao Consultório Central de Cuidado.',
   publico: 'geral',
-  alertaDeSangramento: 'a Dra. Ana e a Júlia',
+  alertaDeSangramento: 'a médica e a Júlia',
   // A frase do Dr. Fabio sem os convenios dele.
   prontoSocorro:
     'Em caso de urgência, emergência ou sangramento intenso, dirija-se imediatamente ao Pronto-Socorro mais próximo ' +
     'que atenda ao seu plano de saúde ou ao atendimento particular de sua preferência.',
   sinaisDeAlarme: true,
   equipe: ['Júlia'],
-  nomesDoMedico: ['ana', 'ribeiro'],
+  nomesDoMedico: [],
 }
 
 /** O robo de origem, pediatrico. So os testes do motor ("c1") rodam nele aqui. */

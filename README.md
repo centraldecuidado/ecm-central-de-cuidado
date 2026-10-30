@@ -2,7 +2,7 @@
 
 Cópia do sistema do Dr. Fábio Dario (agenda, prontuário e atendimento pelo
 WhatsApp), publicada em 27/10/2026 como a Central de teste e de demonstração da
-ECM Central de Cuidado, com o consultório fictício da Dra. Ana Ribeiro.
+ECM Central de Cuidado, com um consultório fictício.
 
 - Site da ECM: https://centraldecuidado.github.io/ecm-central-de-cuidado/
 - Central: https://centraldecuidado.github.io/ecm-central-de-cuidado/sistema/
