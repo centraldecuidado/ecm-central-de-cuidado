@@ -8,4 +8,4 @@
  * atendimento que le a configuracao dela) e um id copiado em cada arquivo
  * acaba divergindo.
  */
-export const CLINICA_DE_TESTE = 'f392fe85-ef6e-4729-bd2c-54dbfc9901b9'
+export const CLINICA_DE_TESTE = '91853de7-e223-444d-bc6d-e4b14165b704'
